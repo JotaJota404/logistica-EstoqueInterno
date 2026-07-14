@@ -1,6 +1,7 @@
 package com.logisticaEstoqueInterno.demo.models;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,18 +43,20 @@ public class Produto {
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 
+    @Column(nullable = false, updatable = false)
     private LocalDateTime dataCriacao;
+
+    @Column(nullable = false)
     private LocalDateTime dataAtualizacao;
 
     @PrePersist
-    protected void antesDeSalvar() {
-        this.dataCriacao = LocalDateTime.now();
-        this.dataAtualizacao = LocalDateTime.now();
-    }
-
     @PreUpdate
-    protected void antesDeAtualizar() {
-        this.dataAtualizacao = LocalDateTime.now();
+    private void atualizarTimestamps() {
+        LocalDateTime agora = LocalDateTime.now(ZoneOffset.UTC);
+        if (this.dataCriacao == null) {
+            this.dataCriacao = agora;
+        }
+        this.dataAtualizacao = agora;
     }
 
     public Long getId() {
@@ -124,16 +127,8 @@ public class Produto {
         return dataCriacao;
     }
 
-    public void setDataCriacao(LocalDateTime dataCriacao) {
-        this.dataCriacao = dataCriacao;
-    }
-
     public LocalDateTime getDataAtualizacao() {
         return dataAtualizacao;
-    }
-
-    public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
-        this.dataAtualizacao = dataAtualizacao;
     }
 
     public Produto() {

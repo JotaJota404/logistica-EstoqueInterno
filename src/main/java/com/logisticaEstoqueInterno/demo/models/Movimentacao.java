@@ -1,6 +1,7 @@
 package com.logisticaEstoqueInterno.demo.models;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -67,7 +68,7 @@ public class Movimentacao {
 
     @PrePersist
     protected void antesDeSalvar() {
-        this.dataHora = LocalDateTime.now();
+        this.dataHora = LocalDateTime.now(ZoneOffset.UTC);
     }
 
     public Long getId() {
@@ -136,10 +137,6 @@ public class Movimentacao {
 
     public LocalDateTime getDataHora() {
         return dataHora;
-    }
-
-    public void setDataHora(LocalDateTime dataHora) {
-        this.dataHora = dataHora;
     }
 
     // Métodos utilitários de negócio

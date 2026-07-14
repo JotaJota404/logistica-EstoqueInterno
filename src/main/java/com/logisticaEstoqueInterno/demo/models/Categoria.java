@@ -50,8 +50,7 @@ public class Categoria {
 
     }
 
-    public Categoria(Long id, String nome, String descricao) {
-        this.id = id;
+    public Categoria(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }

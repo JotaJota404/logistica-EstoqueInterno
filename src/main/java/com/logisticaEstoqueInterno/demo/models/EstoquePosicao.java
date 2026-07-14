@@ -1,6 +1,7 @@
 package com.logisticaEstoqueInterno.demo.models;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -34,6 +35,7 @@ public class EstoquePosicao {
     @Column(nullable = false)
     private Integer quantidadeAtual = 0;
 
+    @Column(nullable = false)
     private LocalDateTime ultimaAtualizacao;
 
     public EstoquePosicao() {
@@ -48,7 +50,7 @@ public class EstoquePosicao {
     @PrePersist
     @PreUpdate
     private void atualizarTimestamp() {
-        this.ultimaAtualizacao = LocalDateTime.now();
+        this.ultimaAtualizacao = LocalDateTime.now(ZoneOffset.UTC);
     }
 
     public Long getId() {
@@ -85,9 +87,5 @@ public class EstoquePosicao {
 
     public LocalDateTime getUltimaAtualizacao() {
         return ultimaAtualizacao;
-    }
-
-    public void setUltimaAtualizacao(LocalDateTime ultimaAtualizacao) {
-        this.ultimaAtualizacao = ultimaAtualizacao;
     }
 }

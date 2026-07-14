@@ -61,8 +61,7 @@ public class LocalArmazenamento {
 
     }
 
-    public LocalArmazenamento(Long id, String nome, String descricao) {
-        this.id = id;
+    public LocalArmazenamento(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
     }
