@@ -14,12 +14,22 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString(exclude = {"produto", "localArmazenamento"})
 @Entity
 @Table(name = "estoque_posicao", uniqueConstraints = {
         @UniqueConstraint(columnNames = { "produto_id", "local_id" })
 })
 public class EstoquePosicao {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,11 +45,9 @@ public class EstoquePosicao {
     @Column(nullable = false)
     private Integer quantidadeAtual = 0;
 
+    @Setter(AccessLevel.NONE)
     @Column(nullable = false)
     private LocalDateTime ultimaAtualizacao;
-
-    public EstoquePosicao() {
-    }
 
     public EstoquePosicao(Produto produto, LocalArmazenamento localArmazenamento, Integer quantidadeAtual) {
         this.produto = produto;
@@ -51,41 +59,5 @@ public class EstoquePosicao {
     @PreUpdate
     private void atualizarTimestamp() {
         this.ultimaAtualizacao = LocalDateTime.now(ZoneOffset.UTC);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public LocalArmazenamento getLocalArmazenamento() {
-        return localArmazenamento;
-    }
-
-    public void setLocalArmazenamento(LocalArmazenamento localArmazenamento) {
-        this.localArmazenamento = localArmazenamento;
-    }
-
-    public Integer getQuantidadeAtual() {
-        return quantidadeAtual;
-    }
-
-    public void setQuantidadeAtual(Integer quantidadeAtual) {
-        this.quantidadeAtual = quantidadeAtual;
-    }
-
-    public LocalDateTime getUltimaAtualizacao() {
-        return ultimaAtualizacao;
     }
 }

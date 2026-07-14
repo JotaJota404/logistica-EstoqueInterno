@@ -2,6 +2,7 @@ package com.logisticaEstoqueInterno.demo.models;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,7 +14,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString(exclude = {"produto", "localOrigem", "localDestino"})
 @Entity
 @Table(name = "movimentacoes")
 public class Movimentacao {
@@ -47,14 +57,10 @@ public class Movimentacao {
     @Column(nullable = false, length = 100)
     private String responsavel;
 
+    @Setter(AccessLevel.NONE)
     @Column(nullable = false, updatable = false)
     private LocalDateTime dataHora;
 
-    // Construtor padrão (JPA)
-    public Movimentacao() {
-    }
-
-    // Construtor parametrizado de uso no Service
     public Movimentacao(Produto produto, LocalArmazenamento localOrigem, LocalArmazenamento localDestino,
             TipoMovimentacao tipo, Integer quantidade, String motivo, String responsavel) {
         this.produto = produto;
@@ -69,74 +75,6 @@ public class Movimentacao {
     @PrePersist
     protected void antesDeSalvar() {
         this.dataHora = LocalDateTime.now(ZoneOffset.UTC);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public LocalArmazenamento getLocalOrigem() {
-        return localOrigem;
-    }
-
-    public void setLocalOrigem(LocalArmazenamento localOrigem) {
-        this.localOrigem = localOrigem;
-    }
-
-    public LocalArmazenamento getLocalDestino() {
-        return localDestino;
-    }
-
-    public void setLocalDestino(LocalArmazenamento localDestino) {
-        this.localDestino = localDestino;
-    }
-
-    public TipoMovimentacao getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(TipoMovimentacao tipo) {
-        this.tipo = tipo;
-    }
-
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public String getMotivo() {
-        return motivo;
-    }
-
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
-
-    public String getResponsavel() {
-        return responsavel;
-    }
-
-    public void setResponsavel(String responsavel) {
-        this.responsavel = responsavel;
-    }
-
-    public LocalDateTime getDataHora() {
-        return dataHora;
     }
 
     // Métodos utilitários de negócio
