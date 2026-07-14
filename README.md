@@ -120,7 +120,7 @@ Categoria (1) ←——— (N) Produto (1) ←——— (N) EstoquePosicao (N) �
 | Sprint | Foco | Status |
 |---|---|---|
 | **Sprint 0** | Setup do projeto, configuração do banco H2, estrutura de pacotes | ✅ Concluída |
-| **Sprint 1** | CRUD de Produto, Categoria e LocalArmazenamento | 🔲 Pendente |
+| **Sprint 1** | CRUD de Produto, Categoria e LocalArmazenamento | 🟡 Em andamento |
 | **Sprint 2** | Movimentações (entrada, saída, transferência) + regras de bloqueio | 🔲 Pendente |
 | **Sprint 3** | Relatórios, tratamento de exceções global, testes unitários | 🔲 Pendente |
 
