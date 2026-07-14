@@ -1,4 +1,5 @@
 HELP.md
+SGE_Documentacao_Atualizada.md
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

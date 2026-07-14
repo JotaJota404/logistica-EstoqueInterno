@@ -1,2 +1,26 @@
-/mvnw text eol=lf
-*.cmd text eol=crlf
+# Normalizar line endings para LF no repositório (padrão para projetos Java/Spring)
+* text=auto eol=lf
+
+# Java e arquivos de projeto
+*.java text eol=lf
+*.xml  text eol=lf
+*.yaml text eol=lf
+*.yml  text eol=lf
+*.json text eol=lf
+*.md   text eol=lf
+*.sql  text eol=lf
+*.properties text eol=lf
+
+# Maven wrapper — DEVE ser LF para funcionar no Linux/CI
+mvnw   text eol=lf
+
+# Scripts Windows — DEVE ser CRLF
+*.cmd  text eol=crlf
+*.bat  text eol=crlf
+
+# Binários — não converter
+*.jar  binary
+*.class binary
+*.png  binary
+*.jpg  binary
+*.gif  binary
