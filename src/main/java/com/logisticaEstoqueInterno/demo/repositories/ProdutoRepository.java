@@ -17,4 +17,8 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
 
     // Lista produtos de uma categoria específica
     List<Produto> findByCategoriaId(Long categoriaId);
+
+    // Busca produtos cujo nome contém o termo informado (parcial, sem distinção de maiúsculas).
+    // O Spring Data traduz para SQL: WHERE LOWER(nome) LIKE LOWER('%nome%')
+    List<Produto> findByNomeContainingIgnoreCase(String nome);
 }
